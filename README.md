@@ -1,8 +1,7 @@
 ## reconasha
-Let the reconasha do the automation with all the powerful bugbounty tools. Let it happen in the mean time and focus on manual bug hunting.
+Let the reconasha do the automation with all the powerful bugbounty tools.
 
 ## Installation
-
 ### Kali-Linux
 Check /etc/apt/sources.list file for installation sources first.
 
@@ -12,6 +11,8 @@ sudo apt-get install amass httpx nuclei subfinder assetfinder -y``
 
 ## Usage
 Add domains to domains.txt
+
 Make sure domains.txt is at same directory
+
 ``chmod +x reconasha.sh
 .reconasha.sh``
