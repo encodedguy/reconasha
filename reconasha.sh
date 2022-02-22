@@ -7,9 +7,7 @@ cat subdomains-* | sort -u | tee subdomains.txt
 cat subdomains.txt | httpx -sc -server -title -ip -cname -silent -threads 100 -o httpx.txt 
 subjack -w subdomains.txt -t 300 -o subjack.txt0
 cat httpx.txt | cut -d' ' -f1 | tee live.txt
-mkdir nuclei; nuclei -silent -l live.txt -t cves -o nuclei/cves.txt -rl 300
-nuclei -l live.txt -silent -t exposures -rl 300 -o nuclei/exposures.txt
-nuclei -l live.txt -silent -t exposed-panels -rl 300 -o nuclei/exposures.txt
-nuclei -l live.txt -silent -t misconfiguration -rl 300 -o nuclei/misconfiguration.txt
-nuclei -l live.txt -silent -t takeovers -rl 300 -o nuclei/takeovers.txt
-nuclei -l live.txt -silent -t default-logins -rl 300 -o nuclei/default-logins.txt
+mkdir nuclei; nuclei -silent -l live.txt -t cves -c 50 -o nuclei/cves.txt -rl 300
+nuclei -l live.txt -silent -t exposures -t exposed-panels -rl 300 -c 50 -o nuclei/exposures_exposed-panels.txt
+nuclei -l live.txt -silent -t misconfiguration -rl 300 -c 50 -o nuclei/misconfiguration.txt
+nuclei -l live.txt -silent -t takeovers -t default-logins -rl 300 -c 50 -o nuclei/takeovers_default-logins.txt
