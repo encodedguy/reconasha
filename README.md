@@ -9,6 +9,8 @@ Check /etc/apt/sources.list file for installation sources first.
 sudo apt-get install golang python3 -y
 sudo apt-get install amass httpx nuclei subfinder assetfinder -y``
 
+``export SHODANAPIKEY=<YOUR-API-KEY>``
+
 ## Usage
 Add domains to domains.txt
 
