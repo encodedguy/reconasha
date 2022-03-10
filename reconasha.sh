@@ -1,6 +1,7 @@
 echo "[-] Starting reconasha.sh"
 echo "[-]" $1
 echo ""
+sleep 2
 
 amass enum -noalts -nolocaldb -df $1 -min-for-recursive 7 -passive -o subdomains-amass-passive.txt > /dev/null &
 echo "[+] Starting Amass" &
@@ -16,12 +17,14 @@ cat $1 | parallel -j 10 shosubgo -d {} -s $SHODANAPIKEY 2> /dev/null | tee subdo
 echo "[+] Starting Shosubgo" &
 wait;
 
+echo ""
 echo "[=] Finished Amass"
 echo "[=] Finished Subfinder"
 echo "[=] Finished Assetfinder"
 echo "[=] Finished Crobat"
 echo "[=] Finished Haktrails"
 echo "[=] Finished Shosubgo"
+echo""
 
 cat subdomains-* | sort -u | tee subdomains.txt > /dev/null;
 subdomains=`wc -l subdomains.txt`;
@@ -32,8 +35,10 @@ subjack -w subdomains.txt -t 500 -o subjack.txt > /dev/null &
 echo "[+] Starting Subjack" &
 wait;
 
+echo ""
 echo "[=] Finished Httpx" &
 echo "[=] Finished Subjack"
+echo ""
 
 cat httpx.txt | cut -d' ' -f1 | tee live.txt > /dev/null;
 live=`wc -l live.txt`;
@@ -55,7 +60,11 @@ echo subdomains.txt | gau | tee gau-output.txt > /dev/null;
 echo "[=] Finished Gau"
 
 
+echo ""
 echo "[-] Collected $subdomains Subdomains";
 echo "[-] Collected $live Live Hosts";
 echo "[-] Collected $subjack Takeovers"
 echo "[-] Collected Nuclei Output"
+
+echo ""
+echo "[-] Finished reconasha.sh"
